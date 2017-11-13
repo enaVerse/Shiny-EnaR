@@ -1,7 +1,12 @@
+############# Check and install missing packages
+list.of.packages <- c("network", "enaR", "networkD3")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+
 library(network)
 library(networkD3)
 library(enaR)
-
 
 ############# Building the enaR model
 Ena_inputs_function<- function (flow, input, export, respiration, storage, living){
@@ -23,9 +28,9 @@ Ena_inputs_function<- function (flow, input, export, respiration, storage, livin
 
 ############# Building the network plot 
   
-  ### Construction des objets sources et target à partir de la matrice des flux
+  ### Construction des objets sources et target Ã  partir de la matrice des flux
   F_mat <- as.matrix(model_test,attrname="flow") #matrice des flux
-  vertex <- which(F_mat!=0, arr.ind=T) #extraction des coodronnées des vertex
+  vertex <- which(F_mat!=0, arr.ind=T) #extraction des coodronnÃ©es des vertex
   
   ###construction of simple network (network3d package, function : "simpleNetwork")
   n<-nrow(vertex)
@@ -56,7 +61,7 @@ Ena_inputs_function<- function (flow, input, export, respiration, storage, livin
   }
   
   Links<-vertex
-  Links<-data.frame(source = Links[,1]-1, target = Links[,2]-1, value = flow) # le -1 c'est pour commencer à partir de l'indice 0 pour le package network3d
+  Links<-data.frame(source = Links[,1]-1, target = Links[,2]-1, value = flow) # le -1 c'est pour commencer Ã  partir de l'indice 0 pour le package network3d
   
   vertex.cex=model_test%v%"storage"
   Nodes<-data.frame(name=row.names(F_mat), group = 1, size = vertex.cex)
