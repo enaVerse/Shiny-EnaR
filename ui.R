@@ -20,14 +20,20 @@ ui <- fluidPage(
       fileInput("file3", "Choose respiration CSV File"),
       fileInput("file4", "Choose export CSV File"),
       fileInput("file5", "Choose living CSV File"),
-      fileInput("file6", "Choose storage CSV File")
+      fileInput("file6", "Choose storage CSV File"),
+      tags$hr(),
+      fileInput("file7", "Choose NEA CSV File"),
+      actionButton(inputId = "clicks", label = "Convert inputs to NEA format")
+      
     ),
     
     mainPanel(
       
       uiOutput("tb"),
       tableOutput("main_outputs"),
-      forceNetworkOutput("plot_network")
+      tableOutput("main_outputs2"),
+      forceNetworkOutput("plot_network"),
+      forceNetworkOutput("plot_network2")
       
     )
   )

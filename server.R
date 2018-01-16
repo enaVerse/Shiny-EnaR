@@ -15,8 +15,7 @@ server <- function(input, output) {
   
   df_flow <- reactive({
     req(input$file1)
-    read.csv(input$file1$datapath, row.names = 1)
-    })
+    read.csv(input$file1$datapath, row.names = 1)})
   
   df_input <- reactive({
     req(input$file2)
@@ -37,8 +36,11 @@ server <- function(input, output) {
   df_storage <- reactive({
     req(input$file6)
     read.csv(input$file6$datapath)})
-                            
   
+  model_NEA <- reactive({
+    req(input$file7)
+    read.csv(input$file7$datapath)})
+                            
 ############ Table outputs
   output$tb <- renderUI({
     
@@ -65,13 +67,40 @@ server <- function(input, output) {
                               storage=df_storage(), living=df_living())
   })
   
+  
+  output$main_outputs2<-renderTable({
+    if(is.null(input$file7))     
+      return(NULL)
+    model<-read.nea(input$file7$datapath)
+    Ena_mainOutputs_NEA_function(model)
+  })
+  
+  
 ############ EnaR plot Network 
   
   output$plot_network<-renderForceNetwork({
-  
+    
   Ena_inputs_function (flow=df_flow(), input=df_input(), 
                        export=df_export(), respiration=df_respiration(), 
                        storage=df_storage(), living=df_living())
+  })
+  
+  
+  output$plot_network2<-renderForceNetwork({
+    
+    if(is.null(input$file7))     
+      return(NULL)
+    model<-read.nea(input$file7$datapath)
+    Ena_inputs_NEA_function (model)
+  })
+  
+############ convert to ENA format Network 
+  
+  observeEvent(input$clicks, {
+    
+  write_ENA_function (flow=df_flow(), input=df_input(), 
+                         export=df_export(), respiration=df_respiration(), 
+                         storage=df_storage(), living=df_living())
   })
   
 }
