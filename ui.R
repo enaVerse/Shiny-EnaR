@@ -22,7 +22,7 @@ ui <- fluidPage(
       fileInput("file5", "Choose living CSV File"),
       fileInput("file6", "Choose storage CSV File"),
       tags$hr(),
-      fileInput("file7", "Choose NEA CSV File"),
+      fileInput("file7", "Read NEA CSV File"),
       actionButton(inputId = "clicks", label = "Convert inputs to NEA format")
       
     ),
