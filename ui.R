@@ -1,4 +1,4 @@
-#Check and install missing packages
+# Check and install missing packages
 list.of.packages <- c("shiny", "enaR", "networkD3")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -32,9 +32,11 @@ ui <- fluidPage(
       uiOutput("tb"),
       tableOutput("main_outputs"),
       tableOutput("main_outputs2"),
-      forceNetworkOutput("plot_network"),
-      forceNetworkOutput("plot_network2")
       
+      fluidRow(
+        splitLayout(cellWidths = c("50%", "50%"), 
+                    forceNetworkOutput("plot_network"), 
+                    forceNetworkOutput("plot_network2"))
     )
   )
 )
