@@ -37,6 +37,7 @@ ui <- fluidPage(
         splitLayout(cellWidths = c("50%", "50%"), 
                     forceNetworkOutput("plot_network"), 
                     forceNetworkOutput("plot_network2"))
+      )
     )
   )
 )
