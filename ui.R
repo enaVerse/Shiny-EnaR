@@ -30,8 +30,11 @@ ui <- fluidPage(
     mainPanel(
       
       uiOutput("tb"),
-      tableOutput("main_outputs"),
-      tableOutput("main_outputs2"),
+      
+      fluidRow(
+        splitLayout(cellWidths = c("50%", "50%"),
+                    tableOutput("main_outputs"),
+                    tableOutput("main_outputs2"))),
       
       fluidRow(
         splitLayout(cellWidths = c("50%", "50%"), 
@@ -41,4 +44,5 @@ ui <- fluidPage(
     )
   )
 )
+
 
