@@ -12,5 +12,5 @@ install.packages("enaR")
 
 ```
 library(shiny)
-runGithub("Shiny-enaR","GhassenH")
+runGitHub("Shiny-enaR","GhassenH")
 ```

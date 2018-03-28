@@ -1,4 +1,4 @@
-#Check and install missing packages
+# Check and install missing packages
 list.of.packages <- c("shiny", "enaR", "networkD3")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -20,16 +20,29 @@ ui <- fluidPage(
       fileInput("file3", "Choose respiration CSV File"),
       fileInput("file4", "Choose export CSV File"),
       fileInput("file5", "Choose living CSV File"),
-      fileInput("file6", "Choose storage CSV File")
+      fileInput("file6", "Choose storage CSV File"),
+      tags$hr(),
+      fileInput("file7", "Read NEA CSV File"),
+      actionButton(inputId = "clicks", label = "Convert inputs to NEA format")
+      
     ),
     
     mainPanel(
       
       uiOutput("tb"),
-      tableOutput("main_outputs"),
-      forceNetworkOutput("plot_network")
       
+      fluidRow(
+        splitLayout(cellWidths = c("50%", "50%"),
+                    tableOutput("main_outputs"),
+                    tableOutput("main_outputs2"))),
+      
+      fluidRow(
+        splitLayout(cellWidths = c("50%", "50%"), 
+                    forceNetworkOutput("plot_network"), 
+                    forceNetworkOutput("plot_network2"))
+      )
     )
   )
 )
+
 
